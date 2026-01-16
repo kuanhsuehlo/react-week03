@@ -171,7 +171,8 @@ function App() {
     try {
       const res = await axios.post(`${BASE_URL}/v2/admin/signin`, account)
       const { token, expired } = res.data;
-      document.cookie = `hexToken=${token}; expires=${expired}`;
+      // document.cookie = `hexToken=${token}; expires=${expired}`;
+      document.cookie = `hexToken=${token}; expires=${new Date(expired).toUTCString()}; path=/`;
 
       axios.defaults.headers.common['Authorization'] = token;
       setIsAuth(true);
